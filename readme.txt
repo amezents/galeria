@@ -142,3 +142,73 @@ example of production logs (on heroku)
 2018-01-11T10:43:09.742583+00:00 app[web.1]: 95.37.35.57 - - [11/Jan/2018:10:43:09 +0000] "GET / HTTP/1.1" 200 1720 0.0040
 2018-01-11T10:43:06.942163+00:00 heroku[router]: at=info method=GET path="/photo/4" host=udacity-galeria-amezents.herokuapp.com request_id=b84940ff-a691-409b-8fcc-83d4560e4249 fwd="95.37.35.57" dyno=web.1 connect=2ms service=55ms status=200 bytes=1110 protocol=https
 2018-01-11T10:43:09.741830+00:00 heroku[router]: at=info method=GET path="/" host=udacity-galeria-amezents.herokuapp.com request_id=8fa8e07f-e034-4a2a-9946-e1bc7ea1149b fwd="95.37.35.57" dyno=web.1 connect=1ms service=9ms status=200 bytes=1999 protocol=https
+
+
+
+
+bash process executed as run.6029 and run.2037
+2018-01-11T17:18:48.267165+00:00 heroku[run.6029]: Process exited with status 130
+2018-01-11T17:19:00.053019+00:00 heroku[run.2037]: Awaiting client
+
+amezents@amezents-host:~/project/study/udacity/galeria$ heroku run bash
+Running bash on ⬢ udacity-galeria-amezents... up, run.6029 (Free)
+~ $ pwd
+/app
+~ $ ls
+app.rb	bin  config  config.ru	db  Gemfile  Gemfile.lock  models  Procfile  public  Rakefile  tmp  vendor  views
+~ $ ls ./public/
+style.css
+~ $ ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+nobody       1     0  0 17:15 ?        00:00:00 ps-run
+u33302       4     1  0 17:15 ?        00:00:00 bash
+u33302       8     4  0 17:18 ?        00:00:00 ps -ef
+~ $ exit
+exit
+amezents@amezents-host:~/project/study/udacity/galeria$
+amezents@amezents-host:~/project/study/udacity/galeria$ heroku run bash &
+[1] 18518
+Running bash on ⬢ udacity-galeria-amezents... ⣽ connecting, run.2037 (Free)
+Running bash on ⬢ udacity-galeria-amezents... up, run.2037 (Free)
+[1]+  Остановлен    heroku run bash
+amezents@amezents-host:~/project/study/udacity/galeria$ heroku run bash &
+[2] 18553
+Running bash on ⬢ udacity-galeria-amezents... !
+ ▸    Cannot run more than 1 Free size dynos.
+
+[2]-  Выход 1            heroku run bash
+amezents@amezents-host:~/project/study/udacity/galeria$ heroku logs -s app
+ ▸    Response code 404 (Not Found)
+amezents@amezents-host:~/project/study/udacity/galeria$ heroku logs -s heroku
+
+2018-01-11T11:40:46.739686+00:00 heroku[web.1]: Process exited with status 1
+2018-01-11T17:09:18.036331+00:00 heroku[web.1]: Starting process with command `bundle exec rackup config.ru -p 7625`
+2018-01-11T17:09:15.487500+00:00 heroku[web.1]: State changed from down to starting
+2018-01-11T17:09:57.624864+00:00 heroku[web.1]: Starting process with command `bundle exec rackup config.ru -p 9831`
+2018-01-11T17:11:38.651599+00:00 heroku[router]: at=info method=GET path="/style.css" host=udacity-galeria-amezents.herokuapp.com request_id=a338afdf-b079-478b-94ee-42f0be9332af fwd="95.37.35.57" dyno=web.1 connect=8ms service=17ms status=200 bytes=1709 protocol=https
+2018-01-11T17:11:38.416397+00:00 heroku[router]: at=info method=GET path="/" host=udacity-galeria-amezents.herokuapp.com request_id=404c38f7-c423-4d11-880b-d264fc2ffa3b fwd="95.37.35.57" dyno=web.1 connect=0ms service=398ms status=200 bytes=1975 protocol=https
+2018-01-11T17:11:55.141392+00:00 heroku[router]: at=info method=GET path="/style.css" host=udacity-galeria-amezents.herokuapp.com request_id=fcd69bca-2bd3-4422-ab29-f491a5b11537 fwd="95.37.35.57" dyno=web.1 connect=1ms service=25ms status=304 bytes=166 protocol=https
+2018-01-11T17:11:55.343363+00:00 heroku[router]: at=info method=GET path="/gxpKdOMD8Y8.jpg" host=udacity-galeria-amezents.herokuapp.com request_id=fea2a9fe-c464-4f8c-8edc-86a037487487 fwd="95.37.35.57" dyno=web.1 connect=0ms service=9ms status=304 bytes=166 protocol=https
+2018-01-11T17:11:57.944301+00:00 heroku[router]: at=info method=GET path="/" host=udacity-galeria-amezents.herokuapp.com request_id=cdb84709-1e0b-4b5c-a408-597b63dd15f8 fwd="95.37.35.57" dyno=web.1 connect=0ms service=108ms status=200 bytes=2126 protocol=https
+2018-01-11T17:15:03.816350+00:00 heroku[run.6029]: Starting process with command `bash`
+2018-01-11T17:15:03.755247+00:00 heroku[run.6029]: Awaiting client
+2018-01-11T17:15:03.798612+00:00 heroku[run.6029]: State changed from starting to up
+2018-01-11T17:14:20.426134+00:00 heroku[router]: at=info method=GET path="/style.css" host=udacity-galeria-amezents.herokuapp.com request_id=601fde80-2dd8-4892-87ea-3611a4792ed3 fwd="95.37.35.57" dyno=web.1 connect=1ms service=19ms status=304 bytes=166 protocol=https
+2018-01-11T17:14:20.574024+00:00 heroku[router]: at=info method=GET path="/gxpKdOMD8Y8.jpg" host=udacity-galeria-amezents.herokuapp.com request_id=df0f16da-d77e-49f1-84f8-af4bd5ba9367 fwd="95.37.35.57" dyno=web.1 connect=1ms service=29ms status=304 bytes=166 protocol=https
+2018-01-11T17:14:20.192399+00:00 heroku[router]: at=info method=GET path="/" host=udacity-galeria-amezents.herokuapp.com request_id=4cdb9525-9001-4172-8042-2d4448323b93 fwd="95.37.35.57" dyno=web.1 connect=1ms service=213ms status=200 bytes=2126 protocol=https
+2018-01-11T17:18:48.267165+00:00 heroku[run.6029]: Process exited with status 130
+2018-01-11T17:19:00.053019+00:00 heroku[run.2037]: Awaiting client
+2018-01-11T17:19:00.095698+00:00 heroku[run.2037]: Starting process with command `bash`
+2018-01-11T17:18:48.285819+00:00 heroku[run.6029]: State changed from up to complete
+2018-01-11T17:18:59.979485+00:00 heroku[run.2037]: State changed from starting to up
+amezents@amezents-host:~/project/study/udacity/galeria$ 
+
+amezents@amezents-host:~/project/study/udacity/galeria$ heroku logs -d run
+2018-01-11T17:15:03.816350+00:00 heroku[run.6029]: Starting process with command `bash`
+2018-01-11T17:15:03.755247+00:00 heroku[run.6029]: Awaiting client
+2018-01-11T17:15:03.798612+00:00 heroku[run.6029]: State changed from starting to up
+2018-01-11T17:18:48.267165+00:00 heroku[run.6029]: Process exited with status 130
+2018-01-11T17:19:00.053019+00:00 heroku[run.2037]: Awaiting client
+2018-01-11T17:19:00.095698+00:00 heroku[run.2037]: Starting process with command `bash`
+2018-01-11T17:18:48.285819+00:00 heroku[run.6029]: State changed from up to complete
+2018-01-11T17:18:59.979485+00:00 heroku[run.2037]: State changed from starting to up
